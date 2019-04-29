@@ -1,15 +1,20 @@
 import React from 'react';
 import axios from 'axios';
+import Calendar from './Calendar';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			data: {}
+			data: {},
+			start: new Date(),
+			end: new Date()
 		}
 
 		this.getCoinDeskInfo = this.getCoinDeskInfo.bind(this);
+		this.handleStartDate = this.handleStartDate.bind(this);
+		this.handleEndDate = this.handleEndDate.bind(this);
 	}
 
 	componentDidMount() {
@@ -25,11 +30,22 @@ class App extends React.Component {
 			.catch(err => console.error(err));
 	}
 
+	handleStartDate(start) {
+		this.setState({ start })
+	}
+
+	handleEndDate(end) {
+		this.setState({ end })
+	}
+
 	render() {
-		const { data } = this.state;
+		const { data, start, end } = this.state;
 
 		return (
 			<div>
+				<div>
+					<Calendar start={start} end={end} changeStartDate={this.handleStartDate} changeEndDate={this.handleEndDate} />
+				</div>
 				<div>
 					<a> {JSON.stringify(data)} </a>
 				</div>
