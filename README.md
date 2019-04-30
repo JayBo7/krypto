@@ -25,7 +25,7 @@ Build the bundle.js
 ```sh
 npm run dev
 ```
->Run server
+>Run the server
 ```sh
 npm run start-dev
 ```
