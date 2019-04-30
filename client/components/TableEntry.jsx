@@ -1,8 +1,19 @@
-const TableEntry = ({ date, value }) => (
-	<div className="TableEntry">
-		<a className="Entry Date">{date}</a> 
-		<a className="Entry Value">{value.toFixed(2)}</a>
-	</div>
-)
+
+const TableEntry = ({ date, value, currency }) => {
+
+	const symbol = {
+		"USD": "$",
+		"GBP": "£",
+		"EUR": "€",
+		"CNY": "¥"
+	}
+
+	return (
+		<tr>
+			<td>{date}</td> 
+			<td>{symbol[currency] + value.toFixed(2)}</td>
+		</tr>
+	)
+}
 
 export default TableEntry;
