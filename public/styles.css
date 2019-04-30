@@ -1,11 +1,37 @@
 body {
 	font-family: 'Montserrat', sans-serif;
+	max-width: 100%;
+}
+.controller {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.Chart {
+	height: 500px;
+	width: 800px;
+}
+.Table {
+	height:400px;
+	overflow: auto;
 }
 .TableEntry {
 	display: flex;
 	justify-content: center;
 }
-.Entry {
+td, th {
 	border: solid black 1px;
 	padding: 3px;
+}
+.data {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+input {
+	margin: 10px;
+}
+.disclaimer {
+	display: flex;
+	justify-content: center;
 }
