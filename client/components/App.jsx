@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Calendar from './Calendar';
 import Table from './Table';
+import Graph from './Graph';
 import dateFns from 'date-fns';
-import {Line} from 'react-chartjs-2';
 
 class App extends React.Component {
 	constructor(props) {
@@ -14,7 +14,7 @@ class App extends React.Component {
 			disclaimer: '',
 			labels: [],
 			values: [],
-			start: dateFns.subDays(new Date(), 10),
+			start: dateFns.subDays(new Date(), 30),
 			end: dateFns.subDays(new Date(), 1),
 			currency: 'USD',
 			xAxis: ''
@@ -61,38 +61,9 @@ class App extends React.Component {
 	render() {
 		const { bpi, disclaimer, labels, values, start, end, currency, xAxis } = this.state;
 
-		const myChart = {
-			type: 'line',
-			labels: labels,
-      datasets: [
-		    {
-		      label: 'bitcoin value',
-		      fill: false,
-		      lineTension: 0.1,
-		      backgroundColor: 'rgba(75,192,192,0.4)',
-		      borderColor: 'rgba(75,192,192,1)',
-		      borderCapStyle: 'butt',
-		      borderDash: [],
-		      borderDashOffset: 0.0,
-		      borderJoinStyle: 'miter',
-		      pointBorderColor: 'rgba(75,192,192,1)',
-		      pointBackgroundColor: '#fff',
-		      pointBorderWidth: 1,
-		      pointHoverRadius: 5,
-		      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-		      pointHoverBorderColor: 'rgba(220,220,220,1)',
-		      pointHoverBorderWidth: 2,
-		      pointRadius: 1,
-		      pointHitRadius: 10,
-		      data: values
-		    }
-		  ]
-		}
-
-
 		return (
 			<div>
-				<div>
+				<div className="controller">
 					<Calendar start={start} end={end} changeStartDate={this.handleStartDate} changeEndDate={this.handleEndDate} />
 					<select onChange={() => this.handleCurrency(event)}>
 						<option value="USD">USD</option>
@@ -100,32 +71,18 @@ class App extends React.Component {
 						<option value="EUR">EUR</option>
 						<option value="CNY">CNY</option>
 					</select>
-					<input type="button" onClick={() => this.getCoinDeskInfo()} />
+					<input type="button" value="Go" onClick={() => this.getCoinDeskInfo()} />
 				</div>
-				<div>
-					<Line data={myChart} options= {{
-				  	scales: {
-				  		yAxes: [{
-				  			scaleLabel: {
-				  				display: true,
-				  				labelString: 'Dates'
-				  			}
-				  		}],
-				  		xAxes: [{
-				  			scaleLabel: {
-					  			display: true,
-					  			labelString: xAxis
-					  		}
-				  		}]
-				  	}
-				  }}
-			  />
+				<div className="data">
+					<div className="Chart">
+						<Graph labels={labels} values={values} xAxis={xAxis} />
+					</div>
+					<div className="Table">
+						<Table labels={labels} values={values} currency={currency}/>
+					</div>
 				</div>
-				<div>
-					<Table labels={labels} values={values} />
-				</div>
-				<div>
-					<a className="disclaimer" href="https://www.coindesk.com/price/bitcoin"><b>{disclaimer}</b></a>
+				<div className="disclaimer">
+					<a href="https://www.coindesk.com/price/bitcoin"><b>{disclaimer}</b></a>
 				</div>
 			</div>
 		)
