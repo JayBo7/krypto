@@ -10,11 +10,8 @@ const Calendar = ({ start, end, changeStartDate, changeEndDate }) => (
 	  	selectsStart
 	  	startDate={start}
 	  	endDate={end}
-	    showTimeSelect
-	    timeFormat="HH:mm"
-	    timeIntervals={1}
-	    dateFormat="MMMM d, yyyy h:mm aa"
-	    timeCaption="time"/>
+	    dateFormat="MMMM d, yyyy"
+	    />
 	  <DatePicker 
 	  	selected={end} 
 	  	allowSameDay={true}
@@ -22,11 +19,8 @@ const Calendar = ({ start, end, changeStartDate, changeEndDate }) => (
 	  	selectsEnd
 	  	startDate={start}
 	  	endDate={end}
-	    showTimeSelect
-	    timeFormat="HH:mm"
-	    timeIntervals={1}
-	    dateFormat="MMMM d, yyyy h:mm aa"
-	    timeCaption="time"/>
+	    dateFormat="MMMM d, yyyy"
+	    />
     </div>
 )
 
